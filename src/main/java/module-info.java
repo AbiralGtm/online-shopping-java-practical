@@ -4,4 +4,6 @@ module com.abiralgautam.onlineshopping {
 
     opens com.abiralgautam.onlineshopping to javafx.fxml;
     exports com.abiralgautam.onlineshopping;
+    exports com.abiralgautam.onlineshopping.Controllers;
+    opens com.abiralgautam.onlineshopping.Controllers to javafx.fxml;
 }
