@@ -5,11 +5,11 @@
                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <servlet>
-        <servlet-name>MyFirstServlet</servlet-name>
-        <servlet-class>com.abiralgautam.onlineshopping.servlets.MyFirstServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.abiralgautam.onlineshopping.servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MyFirstServlet</servlet-name>
-        <url-pattern>/MyFirstServlet</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/auth/login</url-pattern>
     </servlet-mapping>
 </web-app>

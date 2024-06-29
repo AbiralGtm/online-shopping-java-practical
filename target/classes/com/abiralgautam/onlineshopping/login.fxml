@@ -16,6 +16,8 @@
             <Label text="Login"
                    style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-padding: 20px; -fx-min-width: 100px"/>
         </VBox>
+        <Label fx:id="responseLabel"/>
+
         <VBox alignment="CENTER" maxWidth="200">
             <Label text="Username " style="-fx-font-size: 20px;"/>
             <TextField fx:id="username" promptText="Enter Username"
