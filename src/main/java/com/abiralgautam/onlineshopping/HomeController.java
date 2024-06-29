@@ -1,4 +1,4 @@
-package com.abiralgautam.onlineshopping.Controllers;
+package com.abiralgautam.onlineshopping;
 
 import com.abiralgautam.onlineshopping.App;
 import javafx.fxml.FXML;
@@ -31,7 +31,7 @@ public class HomeController {
     }
 
     @FXML
-    private  void goToLoginPage() throws IOException
+    private void goToLoginPage() throws IOException
     {
         App.setRoot("login");
     }

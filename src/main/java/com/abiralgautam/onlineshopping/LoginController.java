@@ -1,4 +1,4 @@
-package com.abiralgautam.onlineshopping.Controllers;
+package com.abiralgautam.onlineshopping;
 
 import com.abiralgautam.onlineshopping.App;
 import javafx.fxml.FXML;
@@ -21,6 +21,7 @@ public class LoginController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Username"+ username.getText() + "pas"+password.getText());
         alert.showAndWait();
+
     }
 
     @FXML
