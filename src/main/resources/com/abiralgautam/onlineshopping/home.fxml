@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<VBox  spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.abiralgautam.onlineshopping.HomeController">
+    <Button text="Login" onAction="#goToLoginPage"/>
+    <ListView fx:id="listView" prefHeight="120.0" prefWidth="300.0" />
+    <Button text="Add to Cart" onAction="#addToCart"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="inputTextField" promptText="Enter new item" />
+        <Button text="Add Item" />
+    </HBox>
+</VBox>
