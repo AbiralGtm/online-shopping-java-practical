@@ -12,4 +12,12 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/auth/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>com.abiralgautam.onlineshopping.servlets.ProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/api/products</url-pattern>
+    </servlet-mapping>
 </web-app>

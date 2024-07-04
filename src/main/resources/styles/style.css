@@ -1,0 +1,26 @@
+
+
+/* Button styles */
+.add-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+}
+
+.add-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.add-button:pressed {
+    -fx-background-color: #3e8e41;
+}
+
+.formVbox {
+    -fx-padding: 5px 0px 0px 0px;
+}
+
+.tableVBox{
+    -fx-padding: 5px;
+}

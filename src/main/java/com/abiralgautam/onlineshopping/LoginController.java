@@ -32,9 +32,11 @@ public class LoginController {
         String password = this.password.getText();
 
         try{
-            String response = sendLoginPost("http://localhost:8080/onlineshopping/auth/login",username,password);
+            String postData = "username=" + username+ "&password="+password;
+
+            String response = APIController.sendPost("http://localhost:8080/onlineshopping/auth/login",postData);
             if(response.equals("login_successful")){
-                App.setRoot("home");
+                App.setRoot("products");
             }else{
                 responseLabel.setText(response);
                 responseLabel.setStyle("-fx-text-fill: red");
@@ -44,38 +46,6 @@ public class LoginController {
             responseLabel.setText("Error while logging in");
         }
 
-    }
-
-    private String sendLoginPost(String url, String username, String password) throws Exception{
-        URL loginUrl = new URL(url);
-
-        HttpURLConnection connection = (HttpURLConnection) loginUrl.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        connection.setDoOutput(true);
-
-        String postData = "username=" + username+ "&password="+password;
-
-        try(OutputStream os = connection.getOutputStream()){
-            os.write(postData.getBytes());
-            os.flush();
-        }
-
-        int responseCode = connection.getResponseCode();
-
-        if(responseCode == HttpURLConnection.HTTP_OK) {
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                return response.toString();
-            }
-        }else{
-            return "Failed: HTTP error code:" + responseCode;
-        }
     }
 
     @FXML
