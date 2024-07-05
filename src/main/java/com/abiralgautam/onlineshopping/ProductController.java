@@ -176,4 +176,10 @@ public class ProductController {
     {
         App.setRoot("home");
     }
+
+    @FXML
+    private void goToOrders() throws IOException
+    {
+        App.setRoot("orders");
+    }
 }

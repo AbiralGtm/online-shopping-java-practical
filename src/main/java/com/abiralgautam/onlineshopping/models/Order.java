@@ -9,16 +9,19 @@ public class Order {
     private String deliveryAddress;
     private String contactNumber;
     private String  orderDate;
+
+    private int orderStatus;
     private List<OrderProduct> orderedProducts;
 
     // Constructor, getters, and setters
-    public Order(int orderId, String customerName, String deliveryAddress, String contactNumber, String orderDate, List<OrderProduct> orderedProducts) {
+    public Order(int orderId, String customerName, String deliveryAddress, String contactNumber, String orderDate, List<OrderProduct> orderedProducts,int orderStatus) {
         this.orderId = orderId;
         this.customerName = customerName;
         this.deliveryAddress = deliveryAddress;
         this.contactNumber = contactNumber;
         this.orderDate = orderDate;
         this.orderedProducts = orderedProducts;
+        this.orderStatus = orderStatus;
     }
 
     public int getOrderId() {
@@ -68,4 +71,29 @@ public class Order {
     public void setOrderedProducts(List<OrderProduct> orderedProducts) {
         this.orderedProducts = orderedProducts;
     }
+
+    public String getOrderStatus()
+    {
+        String status = null;
+        switch (this.orderStatus) {
+            case 0:
+                status = "received";
+                break;
+            case 1:
+                status = "processed";
+                break;
+            case 2:
+                status = "shipped";
+                break;
+            case 3:
+                status = "completed";
+                break;
+            // Add more cases as needed
+            default:
+                status = "received";
+                break;
+        }
+        return status;
+    }
+
 }

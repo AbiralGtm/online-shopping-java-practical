@@ -28,4 +28,12 @@
         <servlet-name>OrderServlet</servlet-name>
         <url-pattern>/api/orders</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderUpdateServlet</servlet-name>
+        <servlet-class>com.abiralgautam.onlineshopping.servlets.OrderUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderUpdateServlet</servlet-name>
+        <url-pattern>/api/order/update</url-pattern>
+    </servlet-mapping>
 </web-app>

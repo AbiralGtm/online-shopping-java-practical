@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import java.lang.*?>
+<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.abiralgautam.onlineshopping.OrderController">
-    <!-- Other UI components -->
+    <HBox alignment="CENTER" spacing="20" style="-fx-padding: 5px;">
+        <Button text="Go to Products" onAction="#goToProducts" style="-fx-padding: 5px"/>
+        <Button text="Go to Home" onAction="#goToHome" style="-fx-padding: 5px"/>
+    </HBox>
 
     <TableView fx:id="orderTableView" prefWidth="800" prefHeight="400">
         <columns>
@@ -13,6 +18,8 @@
             <TableColumn fx:id="deliveryAddressColumn" text="Delivery Address" prefWidth="250" />
             <TableColumn fx:id="contactNumberColumn" text="Contact Number" prefWidth="150" />
             <TableColumn fx:id="orderDateColumn" text="Order Date" prefWidth="150" />
+            <TableColumn fx:id="statusColumn" text="Order Status" prefWidth="100" />
+
         </columns>
     </TableView>
 
@@ -29,5 +36,20 @@
             </columns>
         </TableView>
         <Label fx:id="grandTotalLabel" text="Grand Total: Rs." style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10px 0 0 0;" />
+        <HBox spacing="10" style="-fx-padding: 10px 0;">
+            <Label text="Order Status:" />
+            <ComboBox fx:id="statusComboBox" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <!-- Loop through statuses and add each as a ComboBox item -->
+                        <String fx:value="received" />
+                        <String fx:value="processing" />
+                        <String fx:value="shipped" />
+                        <String fx:value="completed" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button text="Update Status" onAction="#handleUpdateStatus" />
+        </HBox>
     </VBox>
 </VBox>

@@ -32,6 +32,7 @@ public class OrderServlet extends HttpServlet {
                     "    o.address AS delivery_address, " +
                     "    o.contact AS contact_number, " +
                     "    o.ordered_on AS order_date, " +
+                    "    o.order_status, " +
                     "    op.id AS product_id, " +
                     "    p.name AS product_name, " +
                     "    p.description AS product_description, " +
@@ -73,6 +74,7 @@ public class OrderServlet extends HttpServlet {
                     orderObject.put("delivery_address", resultSet.getString("delivery_address"));
                     orderObject.put("contact_number", resultSet.getString("contact_number"));
                     orderObject.put("order_date", resultSet.getDate("order_date"));
+                    orderObject.put("order_status", resultSet.getInt("order_status"));
 
                     // Initialize products array for the new order
                     productsArray = new JSONArray();
