@@ -5,6 +5,7 @@ module com.abiralgautam.onlineshopping {
     requires jakarta.servlet;
     requires java.sql;
     requires org.json;
+    requires jakarta.json;
     opens com.abiralgautam.onlineshopping to javafx.fxml;
     exports com.abiralgautam.onlineshopping;
     opens com.abiralgautam.onlineshopping.models to javafx.base;

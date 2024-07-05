@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -47,6 +48,8 @@ public class ProductController {
     @FXML
     private Label responseLabel;
 
+    private static final String API_URL = "http://localhost:8080/onlineshopping/api/products";
+
     private final ObservableList<Product> productList = FXCollections.observableArrayList();
 
     @FXML
@@ -68,8 +71,7 @@ public class ProductController {
 
         // Fetch products and populate the table
         try {
-            String url = "http://localhost:8080/onlineshopping/api/products";
-            String json = APIController.getData(url,"GET");
+            String json = APIController.getData(API_URL,"GET");
             List<Product> products = parseProducts(json);
             productList.addAll(products);
 
@@ -100,7 +102,7 @@ public class ProductController {
         try{
             String postData = "name=" + productName+ "&price="+productPrice + "&description="+ productDescription;
 
-            String response = APIController.sendPost("http://localhost:8080/onlineshopping/api/products",postData);
+            String response = APIController.sendPost(API_URL,postData);
             if(response.equals("product_added_successfully")){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Create Product");
@@ -124,8 +126,7 @@ public class ProductController {
 
     private void refreshTable() {
         try {
-            String url = "http://localhost:8080/onlineshopping/api/products";
-            String json = APIController.getData(url,"GET");
+            String json = APIController.getData(API_URL,"GET");
             List<Product> products = parseProducts(json);
 
             // Clear old data and add new data
@@ -150,7 +151,7 @@ public class ProductController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 // User confirmed deletion, remove the selected item from the TableView and underlying data list
                 try {
-                    String url = "http://localhost:8080/onlineshopping/api/products?id="+selectedProduct.getId();
+                    String url = API_URL+selectedProduct.getId();
                     String response = APIController.getData(url,"DELETE");
                     if(response.equals("product_deleted_successfully")) {
                         productList.remove(selectedProduct);
@@ -168,5 +169,11 @@ public class ProductController {
             alert.setContentText("Please select a product to delete.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void goToHome() throws IOException
+    {
+        App.setRoot("home");
     }
 }

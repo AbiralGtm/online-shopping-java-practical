@@ -20,4 +20,12 @@
         <servlet-name>ProductServlet</servlet-name>
         <url-pattern>/api/products</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.abiralgautam.onlineshopping.servlets.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/api/orders</url-pattern>
+    </servlet-mapping>
 </web-app>
