@@ -5,14 +5,6 @@
                              http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.abiralgautam.onlineshopping.servlets.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/auth/login</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ProductServlet</servlet-name>
         <servlet-class>com.abiralgautam.onlineshopping.servlets.ProductServlet</servlet-class>
     </servlet>

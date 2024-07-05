@@ -80,7 +80,7 @@ public class Order {
                 status = "received";
                 break;
             case 1:
-                status = "processed";
+                status = "processing";
                 break;
             case 2:
                 status = "shipped";

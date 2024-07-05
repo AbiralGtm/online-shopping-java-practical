@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -300,5 +301,17 @@ public class HomeController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to place order", ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void goToProducts() throws IOException
+    {
+        App.setRoot("products");
+    }
+
+    @FXML
+    private void goToOrders() throws IOException
+    {
+        App.setRoot("orders");
     }
 }
