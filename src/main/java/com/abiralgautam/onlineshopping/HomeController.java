@@ -256,7 +256,9 @@ public class HomeController implements Initializable {
         for (CartItem cartItem : cartItems) {
             JSONObject item = new JSONObject();
             item.put("productId", cartItem.getProductId());
-            item.put("quantity", cartItem.getProductQuantity());
+            item.put("quantity", cartItem.getProductQuantity()); // Assuming quantity is 1 for each product here
+            item.put("price", cartItem.getProductPrice());
+            item.put("total_price", cartItem.getTotalPrice()); // Assuming total price is same as price for simplicity
             orderItems.put(item);
         }
 

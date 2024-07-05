@@ -59,19 +59,24 @@ public class OrderServlet extends HttpServlet {
             }
 
             // Insert each product in the order into the order_products table
-            String orderProductSQL = "INSERT INTO order_products(order_id, product_id) VALUES(?, ?)";
+            String orderProductSQL = "INSERT INTO order_products(order_id, product_id, quantity, price, total_price) VALUES(?, ?,?,?,?)";
             PreparedStatement orderProductStmt = connection.prepareStatement(orderProductSQL);
 
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject item = itemsArray.getJSONObject(i);
                 int productId = item.getInt("productId");
                 int quantity = item.getInt("quantity");
+                double price = item.getDouble("price");
 
-                for (int j = 0; j < quantity; j++) {
-                    orderProductStmt.setInt(1, orderId);
-                    orderProductStmt.setInt(2, productId);
-                    orderProductStmt.addBatch();
-                }
+                // Calculate total price for each item
+                double totalPrice = quantity * price;
+
+                orderProductStmt.setInt(1, orderId);
+                orderProductStmt.setInt(2, productId);
+                orderProductStmt.setInt(3, quantity);
+                orderProductStmt.setDouble(4, price);
+                orderProductStmt.setDouble(5, totalPrice);
+                orderProductStmt.addBatch();
             }
 
             orderProductStmt.executeBatch();
