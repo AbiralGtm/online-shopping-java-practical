@@ -13,9 +13,103 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderServlet extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        PrintWriter out = response.getWriter();
+        Connection connection = null;
+
+        try {
+            connection = DatabaseConnection.getConnection();
+            String sql = "SELECT " +
+                    "    o.id AS order_id, " +
+                    "    o.name AS customer_name, " +
+                    "    o.address AS delivery_address, " +
+                    "    o.contact AS contact_number, " +
+                    "    o.ordered_on AS order_date, " +
+                    "    op.id AS product_id, " +
+                    "    p.name AS product_name, " +
+                    "    p.description AS product_description, " +
+                    "    op.quantity, " +
+                    "    op.price AS unit_price, " +
+                    "    op.total_price " +
+                    "FROM " +
+                    "    orders o " +
+                    "INNER JOIN " +
+                    "    order_products op ON o.id = op.order_id " +
+                    "INNER JOIN " +
+                    "    products p ON op.product_id = p.id " +
+                    "ORDER BY " +
+                    "    o.id, op.id";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            JSONArray ordersArray = new JSONArray();
+
+            int currentOrderId = -1;
+            JSONObject orderObject = null;
+            JSONArray productsArray = null;
+
+            while (resultSet.next()) {
+                int orderId = resultSet.getInt("order_id");
+
+                // If it's a new order, create a new order object
+                if (orderId != currentOrderId) {
+                    // Save the previous order object (if exists) into the orders array
+                    if (orderObject != null) {
+                        orderObject.put("products", productsArray);
+                        ordersArray.put(orderObject);
+                    }
+
+                    // Create a new order object
+                    orderObject = new JSONObject();
+                    orderObject.put("id", orderId);
+                    orderObject.put("customer_name", resultSet.getString("customer_name"));
+                    orderObject.put("delivery_address", resultSet.getString("delivery_address"));
+                    orderObject.put("contact_number", resultSet.getString("contact_number"));
+                    orderObject.put("order_date", resultSet.getDate("order_date"));
+
+                    // Initialize products array for the new order
+                    productsArray = new JSONArray();
+
+                    // Update current order id
+                    currentOrderId = orderId;
+                }
+
+                // Create product object for the current row and add it to products array
+                JSONObject productObject = new JSONObject();
+                productObject.put("product_id", resultSet.getInt("product_id"));
+                productObject.put("product_name", resultSet.getString("product_name"));
+                productObject.put("product_description", resultSet.getString("product_description"));
+                productObject.put("quantity", resultSet.getInt("quantity"));
+                productObject.put("unit_price", resultSet.getDouble("unit_price"));
+                productObject.put("total_price", resultSet.getDouble("total_price"));
+
+                productsArray.put(productObject);
+            }
+
+            // Add the last order object to orders array
+            if (orderObject != null) {
+                orderObject.put("products", productsArray);
+                ordersArray.put(orderObject);
+            }
+
+            // Send JSON response
+            out.print(ordersArray.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println("{\"error\":\"" + e.getMessage() + "\"}");
+        } finally {
+            DatabaseConnection.closeConnection(connection);
+        }
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
