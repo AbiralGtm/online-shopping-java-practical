@@ -20,6 +20,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("home"), 1000, 600);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm()); // Load CSS here
         stage.setScene(scene);
+        stage.setTitle("Online Shop Management - Abiral Gautam");
         stage.setMaximized(true);
         stage.show();
     }
